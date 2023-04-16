@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chatgpt.ai.dao.RoleDao">
+  <resultMap id="BaseResultMap" type="com.chatgpt.ai.model.Role">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="vip_level" jdbcType="VARCHAR" property="vipLevel" />
+    <result column="limit_count" jdbcType="INTEGER" property="limitCount" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, vip_level, limit_count, description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ldf..role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ldf..role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.chatgpt.ai.model.Role">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      MariaDB
+    </selectKey>
+    insert into ldf..role (vip_level, limit_count, description
+      )
+    values (#{vipLevel,jdbcType=VARCHAR}, #{limitCount,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.chatgpt.ai.model.Role">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      MariaDB
+    </selectKey>
+    insert into ldf..role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="vipLevel != null">
+        vip_level,
+      </if>
+      <if test="limitCount != null">
+        limit_count,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="vipLevel != null">
+        #{vipLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="limitCount != null">
+        #{limitCount,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chatgpt.ai.model.Role">
+    update ldf..role
+    <set>
+      <if test="vipLevel != null">
+        vip_level = #{vipLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="limitCount != null">
+        limit_count = #{limitCount,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chatgpt.ai.model.Role">
+    update ldf..role
+    set vip_level = #{vipLevel,jdbcType=VARCHAR},
+      limit_count = #{limitCount,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

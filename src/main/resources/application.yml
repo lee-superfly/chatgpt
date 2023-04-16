@@ -1,0 +1,24 @@
+spring:
+  main:
+    banner-mode: off
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:3306/ldf?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: ldf
+    password: lczlxf123
+
+server:
+  port: 8080
+  servlet:
+    context-path: /login
+    encoding:
+      charset: UTF-8
+      enabled: true
+  ssl:
+    enabled: false
+    key-store:
+    key-password:
+    enabled-protocols:
+    ciphers:
+
